@@ -15,6 +15,7 @@ export function SignInButton() {
   const [password, setPassword] = useState("")
   const [error, setError] = useState("")
   const [isPending, setIsPending] = useState(false)
+  const [isGooglePending, setIsGooglePending] = useState(false)
 
   if (sessionPending) {
     return <Button disabled>Loading...</Button>
@@ -78,8 +79,29 @@ export function SignInButton() {
       {error && (
         <p className="text-sm text-destructive">{error}</p>
       )}
-      <Button type="submit" className="w-full" disabled={isPending}>
+      <Button type="submit" className="w-full" disabled={isPending || isGooglePending}>
         {isPending ? "Signing in..." : "Sign in"}
+      </Button>
+      <div className="relative">
+        <div className="absolute inset-0 flex items-center">
+          <span className="w-full border-t" />
+        </div>
+        <div className="relative flex justify-center text-xs uppercase">
+          <span className="bg-background px-2 text-muted-foreground">or</span>
+        </div>
+      </div>
+      <Button
+        type="button"
+        variant="outline"
+        className="w-full"
+        disabled={isPending || isGooglePending}
+        onClick={async () => {
+          setIsGooglePending(true)
+          await signIn.social({ provider: "google", callbackURL: "/dashboard" })
+          setIsGooglePending(false)
+        }}
+      >
+        {isGooglePending ? "Redirecting..." : "Continue with Google"}
       </Button>
       <div className="text-center text-sm text-muted-foreground">
         <Link href="/forgot-password" className="hover:underline">

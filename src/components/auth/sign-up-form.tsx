@@ -6,7 +6,7 @@ import { useRouter } from "next/navigation"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
-import { signUp } from "@/lib/auth-client"
+import { signIn, signUp } from "@/lib/auth-client"
 
 export function SignUpForm() {
   const router = useRouter()
@@ -16,6 +16,7 @@ export function SignUpForm() {
   const [confirmPassword, setConfirmPassword] = useState("")
   const [error, setError] = useState("")
   const [isPending, setIsPending] = useState(false)
+  const [isGooglePending, setIsGooglePending] = useState(false)
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -107,8 +108,29 @@ export function SignUpForm() {
       {error && (
         <p className="text-sm text-destructive">{error}</p>
       )}
-      <Button type="submit" className="w-full" disabled={isPending}>
+      <Button type="submit" className="w-full" disabled={isPending || isGooglePending}>
         {isPending ? "Creating account..." : "Create account"}
+      </Button>
+      <div className="relative">
+        <div className="absolute inset-0 flex items-center">
+          <span className="w-full border-t" />
+        </div>
+        <div className="relative flex justify-center text-xs uppercase">
+          <span className="bg-background px-2 text-muted-foreground">or</span>
+        </div>
+      </div>
+      <Button
+        type="button"
+        variant="outline"
+        className="w-full"
+        disabled={isPending || isGooglePending}
+        onClick={async () => {
+          setIsGooglePending(true)
+          await signIn.social({ provider: "google", callbackURL: "/dashboard" })
+          setIsGooglePending(false)
+        }}
+      >
+        {isGooglePending ? "Redirecting..." : "Continue with Google"}
       </Button>
       <div className="text-center text-sm text-muted-foreground">
         Already have an account?{" "}
