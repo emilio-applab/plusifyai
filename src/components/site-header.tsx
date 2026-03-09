@@ -49,13 +49,12 @@ export function SiteHeader() {
           </Link>
 
           {/* Desktop nav links */}
-          <div className="hidden md:flex items-center gap-6" role="list">
+          <div className="hidden md:flex items-center gap-6">
             {NAV_LINKS.map((link) => (
               <Link
                 key={link.href}
                 href={link.href}
                 className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors"
-                role="listitem"
               >
                 {link.label}
               </Link>
@@ -64,7 +63,6 @@ export function SiteHeader() {
               <Link
                 href="/dashboard"
                 className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors flex items-center gap-1"
-                role="listitem"
               >
                 <LayoutDashboard className="h-4 w-4" aria-hidden="true" />
                 Dashboard
@@ -99,6 +97,7 @@ export function SiteHeader() {
           <div
             id="mobile-menu"
             className="md:hidden border-t bg-background px-4 py-4 flex flex-col gap-4"
+            onKeyDown={(e) => { if (e.key === "Escape") setMobileOpen(false); }}
           >
             {NAV_LINKS.map((link) => (
               <Link

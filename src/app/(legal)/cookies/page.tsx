@@ -1,7 +1,7 @@
 import type { Metadata } from "next"
 
 export const metadata: Metadata = {
-  title: "Cookie Policy — Plushify",
+  title: "Cookie Policy",
   description: "Learn how Plushify uses cookies and how you can manage your preferences.",
 }
 

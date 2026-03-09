@@ -48,6 +48,7 @@
   },
   "devDependencies": {
     "@tailwindcss/postcss": "latest",
+    "@tailwindcss/typography": "^0.5.19",
     "@types/node": "^20.19.30",
     "@types/pg": "^8.16.0",
     "@types/react": "19.2.5",

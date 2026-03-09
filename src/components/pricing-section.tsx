@@ -106,7 +106,11 @@ export function PricingSection() {
       {/* Cards */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6 items-start max-w-5xl mx-auto">
         {PLANS.map((plan) => (
-          <PricingCard key={plan.tier} {...plan} />
+          <PricingCard
+            key={plan.tier}
+            {...plan}
+            price={billing === "annual" ? Math.round(plan.price * 0.8) : plan.price}
+          />
         ))}
       </div>
 

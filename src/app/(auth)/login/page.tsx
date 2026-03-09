@@ -9,6 +9,12 @@ import {
   CardTitle,
 } from "@/components/ui/card"
 import { auth } from "@/lib/auth"
+import type { Metadata } from "next"
+
+export const metadata: Metadata = {
+  title: "Sign In",
+  description: "Sign in to your Plushify account.",
+}
 
 export default async function LoginPage({
   searchParams,

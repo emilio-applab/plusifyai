@@ -34,7 +34,7 @@ export function SiteFooter() {
               Turn anyone into a plushie with the power of AI.
             </p>
             {/* Social placeholder links */}
-            <div className="flex gap-4" aria-label="Social media links">
+            <nav className="flex gap-4" aria-label="Social media links">
               <a
                 href="#"
                 aria-label="Follow us on Twitter / X"
@@ -56,7 +56,7 @@ export function SiteFooter() {
               >
                 TikTok
               </a>
-            </div>
+            </nav>
           </div>
 
           {/* Product column */}

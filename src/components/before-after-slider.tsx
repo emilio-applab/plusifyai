@@ -105,7 +105,7 @@ export function BeforeAfterSlider({
             viewBox="0 0 18 18"
             fill="none"
             aria-hidden="true"
-            className="text-gray-500"
+            className="text-muted-foreground"
           >
             <path
               d="M6 5L2 9l4 4M12 5l4 4-4 4"

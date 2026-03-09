@@ -10,33 +10,7 @@ import {
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Plushify — Turn Anyone Into a Plushie",
-  description:
-    "Upload a photo and get a custom AI-generated plushie in seconds. Turn yourself, friends, family, or pets into adorable plushie art.",
-  keywords: [
-    "plushie",
-    "AI art",
-    "custom plushie",
-    "photo to plushie",
-    "AI image generation",
-    "kawaii",
-    "chibi",
-    "gift ideas",
-  ],
-  openGraph: {
-    type: "website",
-    locale: "en_US",
-    siteName: "Plushify",
-    title: "Plushify — Turn Anyone Into a Plushie",
-    description:
-      "Upload a photo and get a custom AI-generated plushie in seconds.",
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: "Plushify — Turn Anyone Into a Plushie",
-    description:
-      "Upload a photo and get a custom AI-generated plushie in seconds.",
-  },
+  title: { absolute: "Plushify — Turn Anyone Into a Plushie" },
 };
 
 const HOW_IT_WORKS = [

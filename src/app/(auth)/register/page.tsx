@@ -9,6 +9,12 @@ import {
   CardTitle,
 } from "@/components/ui/card"
 import { auth } from "@/lib/auth"
+import type { Metadata } from "next"
+
+export const metadata: Metadata = {
+  title: "Create Account",
+  description: "Create your Plushify account and start generating plushies.",
+}
 
 export default async function RegisterPage() {
   const session = await auth.api.getSession({ headers: await headers() })

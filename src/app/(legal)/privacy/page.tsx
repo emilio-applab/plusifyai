@@ -1,7 +1,7 @@
 import type { Metadata } from "next"
 
 export const metadata: Metadata = {
-  title: "Privacy Policy — Plushify",
+  title: "Privacy Policy",
   description: "Learn how Plushify collects, uses, and protects your personal data.",
 }
 

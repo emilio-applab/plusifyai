@@ -61,7 +61,7 @@ export function PricingCard({
 
       <Button
         asChild
-        className={cn("w-full rounded-full", isPopular ? "" : "variant-outline")}
+        className="w-full rounded-full"
         variant={isPopular ? "default" : "outline"}
       >
         <Link href="/register">{ctaLabel}</Link>

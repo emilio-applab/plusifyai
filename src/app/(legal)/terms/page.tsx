@@ -1,7 +1,7 @@
 import type { Metadata } from "next"
 
 export const metadata: Metadata = {
-  title: "Terms of Service — Plushify",
+  title: "Terms of Service",
   description: "Read the Plushify Terms of Service governing your use of the platform.",
 }
 

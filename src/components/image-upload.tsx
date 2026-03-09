@@ -2,18 +2,37 @@
 
 import { useState, useRef, useCallback } from "react";
 import { Upload } from "lucide-react";
+import { toast } from "sonner";
 import { cn } from "@/lib/utils";
 
-export function ImageUpload() {
+const ACCEPTED_TYPES = ["image/jpeg", "image/png", "image/webp"];
+const MAX_SIZE_BYTES = 10 * 1024 * 1024; // 10 MB
+
+interface ImageUploadProps {
+  onFileSelect?: (file: File) => void;
+}
+
+export function ImageUpload({ onFileSelect }: ImageUploadProps) {
   const [isDragOver, setIsDragOver] = useState(false);
   const [selectedFile, setSelectedFile] = useState<string | null>(null);
   const inputRef = useRef<HTMLInputElement>(null);
 
-  const handleFile = useCallback((file: File | undefined) => {
-    if (file && file.type.startsWith("image/")) {
+  const handleFile = useCallback(
+    (file: File | undefined) => {
+      if (!file) return;
+      if (!ACCEPTED_TYPES.includes(file.type)) {
+        toast.error("Unsupported file type. Please upload a JPG, PNG, or WEBP image.");
+        return;
+      }
+      if (file.size > MAX_SIZE_BYTES) {
+        toast.error("File is too large. Please upload an image under 10 MB.");
+        return;
+      }
       setSelectedFile(file.name);
-    }
-  }, []);
+      onFileSelect?.(file);
+    },
+    [onFileSelect]
+  );
 
   const onDragOver = (e: React.DragEvent) => {
     e.preventDefault();
@@ -57,7 +76,7 @@ export function ImageUpload() {
       <input
         ref={inputRef}
         type="file"
-        accept="image/*"
+        accept=".jpg,.jpeg,.png,.webp"
         className="sr-only"
         onChange={onChange}
         aria-hidden="true"
