@@ -1,174 +1,281 @@
-"use client";
-
+import Image from "next/image";
 import Link from "next/link";
-import { Video, Shield, Database, Palette, Bot } from "lucide-react";
-import { SetupChecklist } from "@/components/setup-checklist";
-import { StarterPromptModal } from "@/components/starter-prompt-modal";
+import { Zap, Sparkles, Heart, Lock, Upload, Wand2, Download } from "lucide-react";
+import { BeforeAfterSlider } from "@/components/before-after-slider";
 import { Button } from "@/components/ui/button";
-import { useDiagnostics } from "@/hooks/use-diagnostics";
+import {
+  MOCK_BEFORE_AFTER_PAIRS,
+  MOCK_EXAMPLE_GALLERY,
+} from "@/lib/mock-data";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Plushify — Turn Anyone Into a Plushie",
+  description:
+    "Upload a photo and get a custom AI-generated plushie in seconds. Turn yourself, friends, family, or pets into adorable plushie art.",
+  keywords: [
+    "plushie",
+    "AI art",
+    "custom plushie",
+    "photo to plushie",
+    "AI image generation",
+    "kawaii",
+    "chibi",
+    "gift ideas",
+  ],
+  openGraph: {
+    type: "website",
+    locale: "en_US",
+    siteName: "Plushify",
+    title: "Plushify — Turn Anyone Into a Plushie",
+    description:
+      "Upload a photo and get a custom AI-generated plushie in seconds.",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Plushify — Turn Anyone Into a Plushie",
+    description:
+      "Upload a photo and get a custom AI-generated plushie in seconds.",
+  },
+};
+
+const HOW_IT_WORKS = [
+  {
+    step: "01",
+    icon: Upload,
+    title: "Upload Your Photo",
+    description:
+      "Drop in a clear photo of yourself, a friend, family member, or pet. JPG, PNG, and WEBP all work great.",
+  },
+  {
+    step: "02",
+    icon: Wand2,
+    title: "Choose Your Style",
+    description:
+      "Pick from Classic, Kawaii, Chibi, or Realistic styles to give your plushie the perfect personality.",
+  },
+  {
+    step: "03",
+    icon: Download,
+    title: "Download Your Plushie",
+    description:
+      "Your AI-generated plushie is ready in seconds. Download in HD and share or send straight to print.",
+  },
+];
+
+const FEATURES = [
+  {
+    icon: Zap,
+    title: "Lightning Fast",
+    description:
+      "AI generation completes in under 30 seconds — no waiting around.",
+  },
+  {
+    icon: Sparkles,
+    title: "HD Quality",
+    description:
+      "Every plushie is delivered at full resolution, ready to print or share.",
+  },
+  {
+    icon: Heart,
+    title: "Pet Friendly",
+    description:
+      "Dogs, cats, rabbits — our AI handles all furry subjects beautifully.",
+  },
+  {
+    icon: Lock,
+    title: "Secure & Private",
+    description:
+      "Your photos are processed securely and never used to train AI models.",
+  },
+];
 
 export default function Home() {
-  const { isAuthReady, isAiReady, loading } = useDiagnostics();
   return (
-    <main className="flex-1 container mx-auto px-4 py-12">
-      <div className="max-w-4xl mx-auto text-center space-y-8">
-        <div className="space-y-4">
-          <div className="flex items-center justify-center gap-3 mb-2">
-            <div className="flex items-center justify-center w-12 h-12 rounded-xl bg-primary/10">
-              <Bot className="h-7 w-7 text-primary" />
-            </div>
-            <h1 className="text-5xl font-bold tracking-tight bg-gradient-to-r from-primary via-primary/90 to-primary/70 bg-clip-text text-transparent">
-              Starter Kit
-            </h1>
-          </div>
-          <h2 className="text-2xl font-semibold text-muted-foreground">
-            Complete Boilerplate for AI Applications
-          </h2>
-          <p className="text-xl text-muted-foreground">
-            A complete agentic coding boilerplate with authentication, database, AI
-            integration, and modern tooling for building AI-powered applications
-          </p>
+    <>
+      {/* ── Hero ─────────────────────────────────────────────── */}
+      <section className="container mx-auto px-4 py-20 md:py-28 text-center space-y-6">
+        <div className="inline-flex items-center gap-2 bg-primary/10 text-primary text-sm font-semibold px-4 py-1.5 rounded-full">
+          <span>✨</span> AI-Powered Plushie Generator
         </div>
-
-        {/* YouTube Tutorial Video */}
-        <div className="space-y-4">
-          <h3 className="text-2xl font-semibold flex items-center justify-center gap-2">
-            <Video className="h-6 w-6" />
-            Video Tutorial
-          </h3>
-          <p className="text-muted-foreground">
-            Watch the complete walkthrough of this agentic coding boilerplate:
-          </p>
-          <div className="relative w-full max-w-3xl mx-auto">
-            <div className="relative pb-[56.25%] h-0 overflow-hidden rounded-lg border">
-              <iframe
-                className="absolute top-0 left-0 w-full h-full"
-                src="https://www.youtube.com/embed/JQ86N3WOAh4"
-                title="Agentic Coding Boilerplate Tutorial"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                allowFullScreen
-              />
-            </div>
-          </div>
+        <h1 className="text-5xl md:text-7xl font-extrabold tracking-tight bg-gradient-to-br from-primary via-primary/80 to-secondary bg-clip-text text-transparent leading-tight">
+          Turn Anyone Into<br />a Plushie
+        </h1>
+        <p className="max-w-xl mx-auto text-lg md:text-xl text-muted-foreground">
+          Upload a photo of yourself, a friend, or your pet and get a custom
+          AI-generated plushie in seconds. No art skills required.
+        </p>
+        <div className="flex flex-col sm:flex-row gap-3 justify-center">
+          <Button asChild size="lg" className="rounded-full px-8 text-base">
+            <Link href="/register">Get Started Free</Link>
+          </Button>
+          <Button
+            asChild
+            variant="outline"
+            size="lg"
+            className="rounded-full px-8 text-base"
+          >
+            <Link href="#examples">See Examples ↓</Link>
+          </Button>
         </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mt-12">
-          <div className="p-6 border rounded-lg">
-            <h3 className="font-semibold mb-2 flex items-center gap-2">
-              <Shield className="h-4 w-4" />
-              Authentication
-            </h3>
-            <p className="text-sm text-muted-foreground">
-              Better Auth with Google OAuth integration
-            </p>
-          </div>
-          <div className="p-6 border rounded-lg">
-            <h3 className="font-semibold mb-2 flex items-center gap-2">
-              <Database className="h-4 w-4" />
-              Database
-            </h3>
-            <p className="text-sm text-muted-foreground">
-              Drizzle ORM with PostgreSQL setup
-            </p>
-          </div>
-          <div className="p-6 border rounded-lg">
-            <h3 className="font-semibold mb-2 flex items-center gap-2">
-              <Bot className="h-4 w-4" />
-              AI Ready
-            </h3>
-            <p className="text-sm text-muted-foreground">
-              Vercel AI SDK with OpenRouter integration
-            </p>
-          </div>
-          <div className="p-6 border rounded-lg">
-            <h3 className="font-semibold mb-2 flex items-center gap-2">
-              <Palette className="h-4 w-4" />
-              UI Components
-            </h3>
-            <p className="text-sm text-muted-foreground">
-              shadcn/ui with Tailwind CSS
-            </p>
-          </div>
+        {/* Hero illustration */}
+        <div className="relative max-w-2xl mx-auto mt-8 rounded-3xl overflow-hidden shadow-2xl">
+          <Image
+            src="https://placehold.co/800x450/ffc8d6/6b3a52?text=🧸+Plushify+Hero"
+            alt="Example plushie outputs showing kawaii, chibi, and classic styles"
+            width={800}
+            height={450}
+            className="w-full"
+            priority
+          />
         </div>
+      </section>
 
-        <div className="space-y-6 mt-12">
-          <SetupChecklist />
-
-          <h3 className="text-2xl font-semibold">Next Steps</h3>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-left">
-            <div className="p-4 border rounded-lg">
-              <h4 className="font-medium mb-2">
-                1. Set up environment variables
-              </h4>
-              <p className="text-sm text-muted-foreground mb-2">
-                Copy <code>.env.example</code> to <code>.env.local</code> and
-                configure:
-              </p>
-              <ul className="text-sm text-muted-foreground space-y-1 list-disc list-inside">
-                <li>POSTGRES_URL (PostgreSQL connection string)</li>
-                <li>GOOGLE_CLIENT_ID (OAuth credentials)</li>
-                <li>GOOGLE_CLIENT_SECRET (OAuth credentials)</li>
-                <li>OPENROUTER_API_KEY (for AI functionality)</li>
-              </ul>
-            </div>
-            <div className="p-4 border rounded-lg">
-              <h4 className="font-medium mb-2">2. Set up your database</h4>
-              <p className="text-sm text-muted-foreground mb-2">
-                Run database migrations:
-              </p>
-              <div className="space-y-2">
-                <code className="text-sm bg-muted p-2 rounded block">
-                  npm run db:generate
-                </code>
-                <code className="text-sm bg-muted p-2 rounded block">
-                  npm run db:migrate
-                </code>
+      {/* ── Before / After Showcase ───────────────────────────── */}
+      <section id="examples" className="bg-muted/40 py-20">
+        <div className="container mx-auto px-4">
+          <div className="text-center mb-12 space-y-3">
+            <h2 className="text-3xl md:text-4xl font-extrabold">
+              See the Magic Yourself
+            </h2>
+            <p className="text-muted-foreground max-w-md mx-auto">
+              Drag the slider to compare the original photo with the AI-generated plushie.
+            </p>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl mx-auto">
+            {MOCK_BEFORE_AFTER_PAIRS.map((pair) => (
+              <div key={pair.label} className="space-y-3">
+                <BeforeAfterSlider
+                  beforeUrl={pair.beforeUrl}
+                  afterUrl={pair.afterUrl}
+                  beforeAlt={pair.beforeAlt}
+                  afterAlt={pair.afterAlt}
+                />
+                <p className="text-center text-sm font-semibold text-muted-foreground">
+                  {pair.label}
+                </p>
               </div>
-            </div>
-            <div className="p-4 border rounded-lg">
-              <h4 className="font-medium mb-2">3. Try the features</h4>
-              <div className="space-y-2">
-                {loading || !isAuthReady ? (
-                  <Button size="sm" className="w-full" disabled={true}>
-                    View Dashboard
-                  </Button>
-                ) : (
-                  <Button asChild size="sm" className="w-full">
-                    <Link href="/dashboard">View Dashboard</Link>
-                  </Button>
-                )}
-                {loading || !isAiReady ? (
-                  <Button
-                    variant="outline"
-                    size="sm"
-                    className="w-full"
-                    disabled={true}
-                  >
-                    Try AI Chat
-                  </Button>
-                ) : (
-                  <Button
-                    asChild
-                    variant="outline"
-                    size="sm"
-                    className="w-full"
-                  >
-                    <Link href="/chat">Try AI Chat</Link>
-                  </Button>
-                )}
-              </div>
-            </div>
-            <div className="p-4 border rounded-lg">
-              <h4 className="font-medium mb-2">4. Start building</h4>
-              <p className="text-sm text-muted-foreground mb-3">
-                Customize the components, add your own pages, and build your
-                application on top of this solid foundation.
-              </p>
-              <StarterPromptModal />
-            </div>
+            ))}
           </div>
         </div>
-      </div>
-    </main>
+      </section>
+
+      {/* ── How It Works ─────────────────────────────────────── */}
+      <section className="py-20">
+        <div className="container mx-auto px-4">
+          <div className="text-center mb-12 space-y-3">
+            <h2 className="text-3xl md:text-4xl font-extrabold">
+              How It Works
+            </h2>
+            <p className="text-muted-foreground max-w-md mx-auto">
+              Three simple steps — from photo to plushie in under a minute.
+            </p>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-4xl mx-auto">
+            {HOW_IT_WORKS.map(({ step, icon: Icon, title, description }) => (
+              <div key={step} className="flex flex-col items-center text-center gap-4">
+                <div className="relative">
+                  <div className="w-16 h-16 rounded-2xl bg-primary/10 flex items-center justify-center">
+                    <Icon className="h-7 w-7 text-primary" aria-hidden="true" />
+                  </div>
+                  <span className="absolute -top-2 -right-2 w-6 h-6 rounded-full bg-primary text-primary-foreground text-xs font-bold flex items-center justify-center">
+                    {step.slice(1)}
+                  </span>
+                </div>
+                <div>
+                  <h3 className="text-lg font-bold mb-1">{title}</h3>
+                  <p className="text-sm text-muted-foreground">{description}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ── Example Gallery ──────────────────────────────────── */}
+      <section className="bg-muted/40 py-20">
+        <div className="container mx-auto px-4">
+          <div className="text-center mb-12 space-y-3">
+            <h2 className="text-3xl md:text-4xl font-extrabold">
+              Gallery of Plushies
+            </h2>
+            <p className="text-muted-foreground max-w-md mx-auto">
+              Hundreds of happy customers have already turned their loved ones into adorable plushies.
+            </p>
+          </div>
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 max-w-5xl mx-auto">
+            {MOCK_EXAMPLE_GALLERY.map((item) => (
+              <div
+                key={item.url}
+                className="rounded-2xl overflow-hidden group relative"
+              >
+                <Image
+                  src={item.url}
+                  alt={item.alt}
+                  width={400}
+                  height={400}
+                  className="w-full aspect-square object-cover transition-transform duration-300 group-hover:scale-105"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-3">
+                  <span className="text-white text-xs font-semibold">
+                    {item.label}
+                  </span>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ── Features ─────────────────────────────────────────── */}
+      <section id="features" className="py-20">
+        <div className="container mx-auto px-4">
+          <div className="text-center mb-12 space-y-3">
+            <h2 className="text-3xl md:text-4xl font-extrabold">
+              Built for Everyone
+            </h2>
+            <p className="text-muted-foreground max-w-md mx-auto">
+              Everything you need to create the perfect plushie, every time.
+            </p>
+          </div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 max-w-5xl mx-auto">
+            {FEATURES.map(({ icon: Icon, title, description }) => (
+              <div
+                key={title}
+                className="p-6 rounded-2xl border bg-card hover:shadow-md transition-shadow space-y-3"
+              >
+                <div className="w-11 h-11 rounded-xl bg-primary/10 flex items-center justify-center">
+                  <Icon className="h-5 w-5 text-primary" aria-hidden="true" />
+                </div>
+                <h3 className="font-bold">{title}</h3>
+                <p className="text-sm text-muted-foreground">{description}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ── CTA Banner ───────────────────────────────────────── */}
+      <section className="py-20">
+        <div className="container mx-auto px-4">
+          <div className="rounded-3xl bg-gradient-to-br from-primary to-secondary p-12 text-center space-y-6 text-primary-foreground">
+            <h2 className="text-3xl md:text-4xl font-extrabold">
+              Ready to Create Your Plushie?
+            </h2>
+            <p className="max-w-md mx-auto opacity-90">
+              Join thousands of happy customers. Your first plushie is on us.
+            </p>
+            <Button
+              asChild
+              size="lg"
+              variant="secondary"
+              className="rounded-full px-10 text-base font-bold"
+            >
+              <Link href="/register">Get Started Free</Link>
+            </Button>
+          </div>
+        </div>
+      </section>
+    </>
   );
 }
