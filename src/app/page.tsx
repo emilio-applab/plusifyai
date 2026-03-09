@@ -1,12 +1,7 @@
-import Image from "next/image";
 import Link from "next/link";
 import { Zap, Sparkles, Heart, Lock, Upload, Wand2, Download } from "lucide-react";
 import { BeforeAfterSlider } from "@/components/before-after-slider";
 import { Button } from "@/components/ui/button";
-import {
-  MOCK_BEFORE_AFTER_PAIRS,
-  MOCK_EXAMPLE_GALLERY,
-} from "@/lib/mock-data";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -89,48 +84,17 @@ export default function Home() {
             size="lg"
             className="rounded-full px-8 text-base"
           >
-            <Link href="#examples">See Examples ↓</Link>
+            <Link href="#features">See Features ↓</Link>
           </Button>
         </div>
-        {/* Hero illustration */}
-        <div className="relative max-w-2xl mx-auto mt-8 rounded-3xl overflow-hidden shadow-2xl">
-          <Image
-            src="https://placehold.co/800x450/ffc8d6/6b3a52?text=🧸+Plushify+Hero"
-            alt="Example plushie outputs showing kawaii, chibi, and classic styles"
-            width={800}
-            height={450}
-            className="w-full"
-            priority
+        {/* Hero — real before/after demo */}
+        <div className="max-w-2xl mx-auto mt-8 shadow-2xl rounded-2xl overflow-hidden">
+          <BeforeAfterSlider
+            beforeUrl="/example/before.webp"
+            afterUrl="/example/after.webp"
+            beforeAlt="Original photo before plushie transformation"
+            afterAlt="AI-generated kawaii plushie output"
           />
-        </div>
-      </section>
-
-      {/* ── Before / After Showcase ───────────────────────────── */}
-      <section id="examples" className="bg-muted/40 py-20">
-        <div className="container mx-auto px-4">
-          <div className="text-center mb-12 space-y-3">
-            <h2 className="text-3xl md:text-4xl font-extrabold">
-              See the Magic Yourself
-            </h2>
-            <p className="text-muted-foreground max-w-md mx-auto">
-              Drag the slider to compare the original photo with the AI-generated plushie.
-            </p>
-          </div>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl mx-auto">
-            {MOCK_BEFORE_AFTER_PAIRS.map((pair) => (
-              <div key={pair.label} className="space-y-3">
-                <BeforeAfterSlider
-                  beforeUrl={pair.beforeUrl}
-                  afterUrl={pair.afterUrl}
-                  beforeAlt={pair.beforeAlt}
-                  afterAlt={pair.afterAlt}
-                />
-                <p className="text-center text-sm font-semibold text-muted-foreground">
-                  {pair.label}
-                </p>
-              </div>
-            ))}
-          </div>
         </div>
       </section>
 
@@ -159,41 +123,6 @@ export default function Home() {
                 <div>
                   <h3 className="text-lg font-bold mb-1">{title}</h3>
                   <p className="text-sm text-muted-foreground">{description}</p>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ── Example Gallery ──────────────────────────────────── */}
-      <section className="bg-muted/40 py-20">
-        <div className="container mx-auto px-4">
-          <div className="text-center mb-12 space-y-3">
-            <h2 className="text-3xl md:text-4xl font-extrabold">
-              Gallery of Plushies
-            </h2>
-            <p className="text-muted-foreground max-w-md mx-auto">
-              Hundreds of happy customers have already turned their loved ones into adorable plushies.
-            </p>
-          </div>
-          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 max-w-5xl mx-auto">
-            {MOCK_EXAMPLE_GALLERY.map((item) => (
-              <div
-                key={item.url}
-                className="rounded-2xl overflow-hidden group relative"
-              >
-                <Image
-                  src={item.url}
-                  alt={item.alt}
-                  width={400}
-                  height={400}
-                  className="w-full aspect-square object-cover transition-transform duration-300 group-hover:scale-105"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-3">
-                  <span className="text-white text-xs font-semibold">
-                    {item.label}
-                  </span>
                 </div>
               </div>
             ))}

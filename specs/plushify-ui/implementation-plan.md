@@ -253,3 +253,4 @@ Minor updates only — no logic changes.
 - [x] Confirm all toast messages fire on non-functional buttons
 - [ ] Commit all changes with descriptive message
 - [ ] Push to GitHub
+

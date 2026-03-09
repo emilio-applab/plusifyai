@@ -89,10 +89,10 @@ export const MOCK_USER_STATS: UserStats = {
 
 export const MOCK_BEFORE_AFTER_PAIRS: BeforeAfterPair[] = [
   {
-    beforeUrl: "https://placehold.co/600x400/e8d5b7/5c4a2a?text=Person+Before",
-    afterUrl: "https://placehold.co/600x400/ffc8d6/6b3a52?text=Person+Plushie",
-    beforeAlt: "Photo of a person",
-    afterAlt: "Plushie version of a person",
+    beforeUrl: "/example/before.webp",
+    afterUrl: "/example/after.webp",
+    beforeAlt: "Original photo before plushie transformation",
+    afterAlt: "AI-generated kawaii plushie output",
     label: "Person",
   },
   {
